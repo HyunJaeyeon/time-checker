@@ -1,15 +1,15 @@
 // App.js
-import React from "react";
-import "./style.css";
-import TimeChcker from "./components/TimeChecker";
+import React from 'react';
+import './style.css';
+import DayColumn from './components/DayColumn';
 
-const App = () => {
+function App() {
   return (
     <div className="app">
-      <h1>schedule-maker</h1>
-      <TimeChcker />
+      <h1>Time-Checker</h1>
+      <DayColumn />
     </div>
   );
-};
+}
 
 export default App;
