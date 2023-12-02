@@ -1,27 +1,30 @@
-import React, { MouseEvent } from 'react';
-
-type TMouseEvent = MouseEvent<HTMLElement>;
+import React, { useState } from 'react';
 
 interface TimeCellProps {
   time: number;
   isDragStart: boolean;
-  checkSelectedTime: (time: number, e: TMouseEvent) => void;
+  checkSelectedTime: (time: number) => boolean;
 }
 
 function TimeCell({ time, isDragStart, checkSelectedTime }: TimeCellProps) {
-  const getSelectedTime = (event: TMouseEvent) => {
+  const [isSelected, setIsSelected] = useState(false);
+
+  const getSelectedTime = () => {
     if (isDragStart) {
-      checkSelectedTime(time, event);
+      setIsSelected(checkSelectedTime(time));
     }
   };
 
   return (
     <td
       className="time-slot"
-      onMouseDown={(event) => getSelectedTime(event)}
-      onMouseEnter={(event) => getSelectedTime(event)}
+      onMouseDown={getSelectedTime}
+      onMouseEnter={getSelectedTime}
+      style={
+        isSelected ? { backgroundColor: 'teal' } : { backgroundColor: 'tomato' }
+      }
     >
-      {`${time}:00`}
+      {' '}
     </td>
   );
 }

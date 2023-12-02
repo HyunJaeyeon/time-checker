@@ -1,25 +1,25 @@
-import React, { useState, MouseEvent } from 'react';
+import React, { useState } from 'react';
 import TimeCell from './TimeCell';
-
-type TMouseEvent = MouseEvent<HTMLElement>;
 
 function DayColumn() {
   const timeLists = [9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
   const [selectedTimes, setSelectedTimes] = useState<number[]>([]);
   const [dragStart, setDragStart] = useState(false);
 
-  const checkSelectedTime = (time: number, e: TMouseEvent) => {
+  const checkSelectedTime = (time: number) => {
+    let isSelected = false;
+
     if (selectedTimes.includes(time)) {
       setSelectedTimes(
         selectedTimes.filter((selectTime) => selectTime !== time),
       );
-      e.target.classList.remove('selected');
     }
     if (!selectedTimes.includes(time)) {
       setSelectedTimes([...selectedTimes, time]);
-      e.target.classList.add('selected');
+      isSelected = true;
     }
-    console.log(selectedTimes);
+
+    return isSelected;
   };
 
   const checkDragStart = () => {
