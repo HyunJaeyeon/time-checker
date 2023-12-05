@@ -1,18 +1,16 @@
-// const selectedTimes = [9, 11, 14, 10, 15, 18];
-// [9,10,11, 14, 15, 18]
-// [[9, 11], [9, 10], [9, 10, 11, 14, 15], [11, 12, 13, 15],[14, 15, 16]]
+interface NoTimeProps {
+  (selectedTimes: number[], timeRange: string[], day: string): void;
+}
 
-function getNoTime(selectedTimes: number[], timeRange: string[]) {
+const getNoTime: NoTimeProps = (selectedTimes, timeRange, day) => {
   selectedTimes.sort((a, b) => a - b);
-
-  // const timeRange: string[] = [];
 
   let min = selectedTimes[0];
   let max: number;
 
   const formatTimeRange = () => {
-    if (min === max) timeRange.push(`${min}`);
-    if (min !== max) timeRange.push(`${min}-${max}`);
+    if (min === max) timeRange.push(`${day}/${min}`);
+    if (min !== max) timeRange.push(`${day}/${min}-${max}`);
   };
 
   selectedTimes.reduce((pre, cur, index) => {
@@ -27,8 +25,6 @@ function getNoTime(selectedTimes: number[], timeRange: string[]) {
     }
     return cur;
   });
-
-  console.log(timeRange);
-}
+};
 
 export default getNoTime;
