@@ -2,6 +2,8 @@ interface NoTimeProps {
   (selectedTimes: number[], timeRange: string[], day: string): void;
 }
 
+const dayLists = ['월', '화', '수', '목', '금'];
+
 const getNoTime: NoTimeProps = (selectedTimes, timeRange, day) => {
   selectedTimes.sort((a, b) => a - b);
 
@@ -13,7 +15,10 @@ const getNoTime: NoTimeProps = (selectedTimes, timeRange, day) => {
     if (min !== max) timeRange.push(`${day}/${min}-${max}`);
   };
 
+  if (selectedTimes.length === 1) timeRange.push(`${day}/${min}`);
+
   selectedTimes.reduce((pre, cur, index) => {
+    // error: reduce는 1개일 때는 안됨.
     if (cur !== pre + 1) {
       max = pre;
       formatTimeRange();
@@ -27,4 +32,14 @@ const getNoTime: NoTimeProps = (selectedTimes, timeRange, day) => {
   });
 };
 
-export default getNoTime;
+function formatter(noTimes: number[][]) {
+  const timeRange: string[] = [];
+  noTimes.map(
+    (noTime, index) =>
+      noTime.length >= 1 && getNoTime(noTime, timeRange, dayLists[index]),
+  );
+
+  return timeRange;
+}
+
+export default formatter;

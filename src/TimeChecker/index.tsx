@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import DayColumn from './DayColumn';
+import formatter from '../utils/formatter';
 
 function TimeChecker() {
   const dayLists = ['월', '화', '수', '목', '금'];
@@ -25,6 +26,7 @@ function TimeChecker() {
 
   useEffect(() => {
     console.log(noTimes);
+    console.log(formatter(noTimes));
   }, [noTimes]);
 
   return (
