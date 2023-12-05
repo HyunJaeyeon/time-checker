@@ -1,14 +1,13 @@
-// App.js
 import React from 'react';
 import './style.css';
-import DayColumn from './components/DayColumn';
+import TimeChecker from './TimeChecker';
 
 function App() {
   return (
-    <div className="app">
+    <>
       <h1>Time-Checker</h1>
-      <DayColumn />
-    </div>
+      <TimeChecker />
+    </>
   );
 }
 

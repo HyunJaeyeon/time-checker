@@ -17,14 +17,16 @@ function TimeCell({ time, isDragStart, checkSelectedTime }: TimeCellProps) {
 
   return (
     <td
-      className="time-slot"
+      className="time-cell"
       onMouseDown={getSelectedTime}
       onMouseEnter={getSelectedTime}
       style={
-        isSelected ? { backgroundColor: 'teal' } : { backgroundColor: 'tomato' }
+        isSelected
+          ? { backgroundColor: 'yellow' }
+          : { backgroundColor: 'white' }
       }
     >
-      {' '}
+      {time}
     </td>
   );
 }

@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import TimeCell from './TimeCell';
 
-function DayColumn() {
+interface DayColumnProps {
+  day: string;
+  isDragStart: boolean;
+}
+
+function DayColumn({ day, isDragStart }: DayColumnProps) {
   const timeLists = [9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
   const [selectedTimes, setSelectedTimes] = useState<number[]>([]);
-  const [dragStart, setDragStart] = useState(false);
 
   const checkSelectedTime = (time: number) => {
     let isSelected = false;
@@ -19,24 +23,17 @@ function DayColumn() {
       isSelected = true;
     }
 
+    console.log(`${day}:${selectedTimes}`);
     return isSelected;
   };
 
-  const checkDragStart = () => {
-    setDragStart((prev) => !prev);
-  };
-
   return (
-    <tr
-      className="time-checker"
-      onMouseDownCapture={checkDragStart}
-      onMouseUp={checkDragStart}
-    >
+    <tr className="day-column">
       {timeLists.map((time, index) => (
         <TimeCell
           key={index}
           time={time}
-          isDragStart={dragStart}
+          isDragStart={isDragStart}
           checkSelectedTime={checkSelectedTime}
         />
       ))}
