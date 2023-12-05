@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import TimeCell from './TimeCell';
 
 interface DayColumnProps {
-  day: string;
+  day: number;
   isDragStart: boolean;
+  getNoTimes: (selectedTimes: number[], day: number) => void;
 }
 
-function DayColumn({ day, isDragStart }: DayColumnProps) {
+function DayColumn({ day, isDragStart, getNoTimes }: DayColumnProps) {
   const timeLists = [9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
   const [selectedTimes, setSelectedTimes] = useState<number[]>([]);
 
@@ -22,10 +23,13 @@ function DayColumn({ day, isDragStart }: DayColumnProps) {
       setSelectedTimes([...selectedTimes, time]);
       isSelected = true;
     }
-
-    console.log(`${day}:${selectedTimes}`);
     return isSelected;
   };
+
+  useEffect(() => {
+    console.log('Start Drag');
+    getNoTimes(selectedTimes, day);
+  }, [isDragStart]);
 
   return (
     <tr className="day-column">
