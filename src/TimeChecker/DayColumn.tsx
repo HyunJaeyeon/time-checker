@@ -27,7 +27,6 @@ function DayColumn({ day, isDragStart, getNoTimes }: DayColumnProps) {
   };
 
   useEffect(() => {
-    console.log('Start Drag');
     getNoTimes(selectedTimes, day);
   }, [isDragStart]);
 

@@ -4,22 +4,22 @@ import DayColumn from './DayColumn';
 function TimeChecker() {
   const dayLists = ['월', '화', '수', '목', '금'];
   const [dragStart, setDragStart] = useState(false);
-  const [noTimes, setNoTimes] = useState([[0], [0], [0], [0], [0]]);
+  const [noTimes, setNoTimes] = useState<number[][]>([]);
 
   const checkDragStart = () => {
     setDragStart(true);
-    console.log('drag Start');
+    // console.log('drag Start');
   };
   const checkDragStop = () => {
     setDragStart(false);
-    console.log('drag stop');
+    // console.log('drag stop');
   };
 
   const getNoTimes = (selectedTimes: number[], day: number) => {
-    setNoTimes((prev) => {
-      const noTime = { ...prev };
-      noTime[day] = selectedTimes;
-      return noTime;
+    setNoTimes((currentNoTimes) => {
+      const noTimesCopy = [...currentNoTimes];
+      noTimesCopy[day] = selectedTimes;
+      return noTimesCopy;
     });
   };
 
