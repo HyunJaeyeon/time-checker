@@ -18,7 +18,6 @@ const getNoTime: NoTimeProps = (selectedTimes, timeRange, day) => {
   if (selectedTimes.length === 1) timeRange.push(`${day}/${min}`);
 
   selectedTimes.reduce((pre, cur, index) => {
-    // error: reduce는 1개일 때는 안됨.
     if (cur !== pre + 1) {
       max = pre;
       formatTimeRange();

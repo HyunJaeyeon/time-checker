@@ -1,10 +1,19 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
 
 interface TimeCellProps {
   time: number;
   isDragStart: boolean;
   checkSelectedTime: (time: number) => boolean;
 }
+
+const Cell = styled.td`
+  padding: 0px;
+  border: 0.7px solid #b5b5b5;
+  flex-shrink: 0px;
+  flex-grow: 1;
+  cursor: pointer;
+`;
 
 function TimeCell({ time, isDragStart, checkSelectedTime }: TimeCellProps) {
   const [isSelected, setIsSelected] = useState(false);
@@ -16,18 +25,15 @@ function TimeCell({ time, isDragStart, checkSelectedTime }: TimeCellProps) {
   };
 
   return (
-    <td
-      className="time-cell"
+    <Cell
       onMouseDown={getSelectedTime}
       onMouseEnter={getSelectedTime}
       style={
-        isSelected
-          ? { backgroundColor: 'yellow' }
-          : { backgroundColor: 'white' }
+        isSelected ? { backgroundColor: '#FB0' } : { backgroundColor: 'white' }
       }
     >
-      {time}
-    </td>
+      {' '}
+    </Cell>
   );
 }
 

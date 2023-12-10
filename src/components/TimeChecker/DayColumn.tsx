@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
 import TimeCell from './TimeCell';
 
 interface DayColumnProps {
@@ -7,8 +8,16 @@ interface DayColumnProps {
   getNoTimes: (selectedTimes: number[], day: number) => void;
 }
 
+const Column = styled.tr`
+  display: flex;
+  flex-direction: column;
+  flex-basis: auto;
+  flex-shrink: 0px;
+  flex-grow: 1;
+`;
+
 function DayColumn({ day, isDragStart, getNoTimes }: DayColumnProps) {
-  const timeLists = [9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
+  const timeLists = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   const [selectedTimes, setSelectedTimes] = useState<number[]>([]);
 
   const checkSelectedTime = (time: number) => {
@@ -31,7 +40,7 @@ function DayColumn({ day, isDragStart, getNoTimes }: DayColumnProps) {
   }, [isDragStart]);
 
   return (
-    <tr className="day-column">
+    <Column>
       {timeLists.map((time, index) => (
         <TimeCell
           key={index}
@@ -40,7 +49,7 @@ function DayColumn({ day, isDragStart, getNoTimes }: DayColumnProps) {
           checkSelectedTime={checkSelectedTime}
         />
       ))}
-    </tr>
+    </Column>
   );
 }
 
